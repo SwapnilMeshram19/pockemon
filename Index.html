@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POCKEMON</title>
+    <style>
+        #container{
+            width:70%;
+            margin: auto;
+        }
+        #container table{
+            width: 100%;
+            text-align: left;
+            border: 2px solid rgb(215, 215, 215);
+        }
+        table tr{
+            
+        }
+        tr td{
+            padding:10px;
+            font-size: 20px;
+            border: 2px solid rgb(186, 186, 186);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+</body>
+    <script>
+
+        if(localStorage.getItem('pockemon')==null){
+            var url="https://pokeapi.co/api/v2/ability/?limit=20";
+            fetchData(url); 
+        }else{
+            displayData(JSON.parse(localStorage.getItem('pockemon')));
+        }
+
+        async function fetchData(url){
+            try{
+                let res=await fetch(url);
+                let data=await res.json();
+                // console.log(data.results);
+                localStorage.setItem('pockemon',JSON.stringify(data.results));
+                displayData(JSON.parse(localStorage.getItem('pockemon')));
+            }catch{
+                console.log(error);
+            }
+        }
+
+        function displayData(pockemon){
+            // console.log(pockemon)
+            var container=document.getElementById('container');
+
+            var table=document.createElement('table');
+            var tr=document.createElement('tr');
+            var count=0;
+            pockemon.forEach(function(ele){
+                // console.log(ele.name);
+                if(count%3==0){
+                  tr= table.insertRow(-1);
+                }
+                var td=document.createElement('td');
+                td.textContent=ele.name;
+                tr.append(td)
+                count++;
+            })
+            table.append(tr);
+
+            container.append(table);
+            
+            
+
+
+
+        }
+        
+        
+        
+        
+    </script>
+</html>
