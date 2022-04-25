@@ -8,6 +8,7 @@
         #container{
             width:70%;
             margin: auto;
+            padding-top: 30px;
         }
         #container table{
             width: 100%;
@@ -22,17 +23,29 @@
             font-size: 20px;
             border: 2px solid rgb(186, 186, 186);
         }
+        button{
+            margin-left: 45%;
+            margin-top: 20px;
+            padding:10px;
+            border-radius: 25px;
+        }
     </style>
 </head>
 <body>
     <div id="container">
+    <table id="table">
 
+    </table>
     </div>
+    <a href="search.html">
+        <button>Go To Search Page</button>
+    </a>
+    
 </body>
     <script>
 
         if(localStorage.getItem('pockemon')==null){
-            var url="https://pokeapi.co/api/v2/ability/?limit=20";
+            var url="https://pokeapi.co/api/v2/pokemon/?limit=21";
             fetchData(url); 
         }else{
             displayData(JSON.parse(localStorage.getItem('pockemon')));
@@ -54,7 +67,7 @@
             // console.log(pockemon)
             var container=document.getElementById('container');
 
-            var table=document.createElement('table');
+            var table=document.getElementById('table');
             var tr=document.createElement('tr');
             var count=0;
             pockemon.forEach(function(ele){

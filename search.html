@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            text-align: center;
+            width:100%;
+        }
+        #search-bar>input{
+            width:20%;
+        }
+        #search-bar>div{
+            margin: auto;
+            border: 2px solid black;
+            width:19.5%;
+            height:150px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="search-bar">
+            <input type="text" id="pockemon-name" oninput="main()">
+            <div id="names"></div>
+
+        </div>
+
+    </div>
+    
+</body>
+<script>
+    async function main(){
+        let data=await searchPockemon();
+    }
+
+    async function searchPockemon(){
+        try{
+            let name=document.getElementById('pockemon-name').value;
+            let url="https://pokeapi.co/api/v2/pokemon/"+name;
+            let res=await fetch(url);
+            let data=await res.json();
+            console.log(data);
+        }catch(error){
+            console.log(error);
+        }
+    }
+</script>
+</html>
